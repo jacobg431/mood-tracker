@@ -1,67 +1,67 @@
 export function getAllMoods(baseUrl) {
     let jsonData;
-    fetch(baseUrl + "moods/")
-    .then(response => response.json())
-    .then(result => jsonData = result)
-    .catch(error => {
-        console.error("Error getting moods: ", error);
-    });
+    fetch(baseUrl + 'moods/')
+        .then((response) => response.json())
+        .then((result) => (jsonData = result))
+        .catch((error) => {
+            console.error('Error getting moods: ', error);
+        });
 
     return jsonData;
 }
 
 export function getUser(baseUrl, userId) {
     let jsonData;
-    fetch(baseUrl + "affirmation_users/" + userId)
-    .then(response => response.json())
-    .then(result => jsonData = result)
-    .catch(error => {
-        console.error("Error getting users: ", error);
-    });
+    fetch(baseUrl + 'affirmation_users/' + userId)
+        .then((response) => response.json())
+        .then((result) => (jsonData = result))
+        .catch((error) => {
+            console.error('Error getting users: ', error);
+        });
 
     return jsonData;
 }
 
 export function deleteUser(baseUrl, apiKey, userId) {
     fetch(baseUrl + userId, {
-        method: "DELETE",
+        method: 'DELETE',
         headers: {
-            "Content-Type": "application/json",
-            "X-API-KEY": apiKey
-        }
+            'Content-Type': 'application/json',
+            'X-API-KEY': apiKey,
+        },
     })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error("HTTP error: " + response.status);
-        }
-        return response.json();
-    })
-    .catch(error => console.error(error));
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error('HTTP error: ' + response.status);
+            }
+            return response.json();
+        })
+        .catch((error) => console.error(error));
 }
 
 export function createNewUser(baseUrl, apiKey, newUsername) {
     let jsonData;
     const data = {
         username: newUsername,
-        affirmations: [] 
+        affirmations: [],
     };
 
     fetch(baseUrl, {
-        method: "POST",
+        method: 'POST',
         headers: {
-            "Content-Type": "application/json",
-            "X-API-KEY": apiKey
+            'Content-Type': 'application/json',
+            'X-API-KEY': apiKey,
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify(data),
     })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error("HTTP error: " + response.status);
-        }
-        return response.json();
-    })
-    .then(result => jsonData = result)
-    .catch(error => console.error(error));
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error('HTTP error: ' + response.status);
+            }
+            return response.json();
+        })
+        .then((result) => (jsonData = result))
+        .catch((error) => console.error(error));
 
     return jsonData;
 }
@@ -71,25 +71,25 @@ export function updateAffirmations(baseUrl, apiKey, userId, username, newAfirmat
     const data = {
         id: userId,
         username: username,
-        affirmations: newAfirmations 
+        affirmations: newAfirmations,
     };
 
     fetch(baseUrl, {
-        method: "PUT",
+        method: 'PUT',
         headers: {
-            "Content-Type": "application/json",
-            "X-API-KEY": apiKey
+            'Content-Type': 'application/json',
+            'X-API-KEY': apiKey,
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify(data),
     })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error("HTTP error: " + response.status);
-        }
-        return response.json();
-    })
-    .then(result => jsonData = result)
-    .catch(error => console.error(error));
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error('HTTP error: ' + response.status);
+            }
+            return response.json();
+        })
+        .then((result) => (jsonData = result))
+        .catch((error) => console.error(error));
 
     return jsonData;
 }
