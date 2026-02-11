@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router';
 import Header from './components/header.jsx';
 import Login from './components/login.jsx';
+import NotFound from './components/notFound.jsx';
 
 function App() {
     const [userName, setUsername] = useState(() => {
@@ -12,8 +13,6 @@ function App() {
     const apiKey = import.meta.env.VITE_API_KEY;
 
     const isLoggedIn = !!userName;
-
-    const NotFound = () => <h1>404 Page Not Found</h1>;
 
     useEffect(() => {
         if (userName) {
