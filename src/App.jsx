@@ -5,31 +5,32 @@ import Login from './components/login.jsx';
 import NotFound from './components/notFound.jsx';
 
 function App() {
-    const [userName, setUsername] = useState(() => {
-        return localStorage.getItem('username') || '';
+    const [userData, setUserData] = useState(() => {
+        try {
+            const stored = localStorage.getItem('userData');
+            return stored ? JSON.parse(stored) : { userId: -1, userName: '' };
+        } catch {
+            return { userId: -1, userName: '' };
+        }
     });
+
+    useEffect(() => {
+        localStorage.setItem('userData', JSON.stringify(userData));
+    }, [userData]);
+
+    const isLoggedIn = userData.userId > 0;
 
     const apiUrl = import.meta.env.VITE_BASE_URL;
     const apiKey = import.meta.env.VITE_API_KEY;
 
-    const isLoggedIn = !!userName;
-
-    useEffect(() => {
-        if (userName) {
-            localStorage.setItem('username', userName);
-        } else {
-            localStorage.removeItem('username');
-        }
-    }, [userName]);
-
     return (
         <BrowserRouter>
-            <Header userName={userName} onSetUserName={setUsername} />
+            <Header userName={userData.userName} onSetUserData={setUserData} />
 
             <Routes>
                 <Route
                     path="/login"
-                    element={<Login onSetUserName={setUsername} userName={userName} apiUrl={apiUrl} apiKey={apiKey} />}
+                    element={<Login onSetUserData={setUserData} userName={userData.userName} apiUrl={apiUrl} apiKey={apiKey} />}
                 />
 
                 <Route path="/selector" element={isLoggedIn ? <div>Selector</div> : <Navigate to="/login" replace />} />
