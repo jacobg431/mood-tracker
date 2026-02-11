@@ -1,10 +1,26 @@
 import { LogOut, User } from 'lucide-react';
+import { useNavigate } from "react-router";
+
 
 export default function Header(props) {
-    function onLogout() {}
+  
     const title = 'Welcome To Mood Tracker';
     const username = props.userName;
     const onSetUserName = props.onSetUserName;
+    const navigate = useNavigate();
+
+    function onSelectorClick(){
+        navigate("/selector");
+    }
+
+    function onProfileClick(){
+        navigate("/profile");
+    }
+
+    function onLogoutClick(){
+        navigate("/login");
+        onSetUserName(""); 
+    }
 
     return (
         <header className="w-full border-b bg-white">
@@ -14,18 +30,32 @@ export default function Header(props) {
 
                 {/* Right: User info + Logout */}
                 <div className="flex items-center gap-4">
-                    <div className="flex items-center gap-2 rounded-full bg-gray-100 px-3 py-1 text-sm text-gray-700">
+                    {username && (
+                        <>
+                    <button
+                        onClick={onSelectorClick}
+                        className="flex items-center gap-2 rounded-lg border px-3 py-1.5 text-sm font-medium text-gray-700 transition hover:bg-gray-100"
+                    >
+                        Mood Selector
+                    </button>
+                    <button 
+                        className="flex items-center gap-2 rounded-lg border px-3 py-1.5 text-sm font-medium text-gray-700 transition hover:bg-gray-100"
+                        onClick={onProfileClick}
+                    >
                         <User className="h-4 w-4" />
                         <span className="font-medium">{username}</span>
-                    </div>
+                    </button>
 
                     <button
-                        onClick={onLogout}
+                        onClick={onLogoutClick}
                         className="flex items-center gap-2 rounded-lg border px-3 py-1.5 text-sm font-medium text-gray-700 transition hover:bg-gray-100"
                     >
                         <LogOut className="h-4 w-4" />
                         Logout
                     </button>
+                     </>
+                    )}
+
                 </div>
             </div>
         </header>

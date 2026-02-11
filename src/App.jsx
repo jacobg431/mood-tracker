@@ -10,8 +10,9 @@ function App() {
 
     return (
         <>
-            <Header userName={userName} onSetUserName={setUsername} />
+            
             <BrowserRouter>
+            <Header userName={userName} onSetUserName={setUsername} />
                 <Routes>
                     <Route path="/" />
                     <Route

@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { getOrCreateUserByUsername } from '../scripts/fetchCalls';
+import { useNavigate } from "react-router";
 
 export default function Login(props) {
     const onSetUserName = props.onSetUserName; 
     const apiKey = props.apiKey; 
     const baseUrl = props.apiUrl;
+    const navigate = useNavigate();
 
     const [name, setName] = useState('');
 
@@ -21,6 +23,9 @@ export default function Login(props) {
         }
 
         onSetUserName(user.username);
+
+        navigate("/profile"); 
+
     };
 
     return (
