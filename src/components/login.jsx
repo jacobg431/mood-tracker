@@ -1,18 +1,26 @@
 import React, { useState } from 'react';
+import { getOrCreateUserByUsername } from '../scripts/fetchCalls';
 
 export default function Login(props) {
+    const onSetUserName = props.onSetUserName; 
+    const apiKey = props.apiKey; 
+    const baseUrl = props.apiUrl;
+
     const [name, setName] = useState('');
-    const onSetUserName = props.onSetUserName;
-    const username = props.userName;
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        const trimmed = name.trim();
+        if (!trimmed) return;
 
-        if (!name.trim()) {
+        const user = await getOrCreateUserByUsername(baseUrl, apiKey, trimmed);
+
+        if (!user) {
+            console.error('Could not create new user.');
             return;
         }
 
-        onSetUserName(name);
+        onSetUserName(user.username);
     };
 
     return (
@@ -25,8 +33,10 @@ export default function Login(props) {
                     onChange={(e) => setName(e.target.value)}
                     className="w-full px-3 py-2 rounded-md mb-4 outline-none text-gray-800"
                 />
-
-                <button type="submit" className="w-full bg-slate-700 hover:bg-slate-800 text-white py-2 rounded-md transition">
+                <button
+                    type="submit"
+                    className="w-full bg-slate-700 hover:bg-slate-800 text-white py-2 rounded-md transition"
+                >
                     Start
                 </button>
             </form>

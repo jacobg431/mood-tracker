@@ -5,6 +5,8 @@ import Login from './components/login.jsx';
 
 function App() {
     const [userName, setUsername] = useState('');
+    const apiUrl = import.meta.env.VITE_BASE_URL;
+    const apiKey = import.meta.env.VITE_API_KEY;
 
     return (
         <>
@@ -12,7 +14,12 @@ function App() {
             <BrowserRouter>
                 <Routes>
                     <Route path="/" />
-                    <Route path="/login" element={<Login onSetUserName={setUsername} userName={userName} />}  />
+                    <Route
+                        path="/login"
+                        element={
+                            <Login onSetUserName={setUsername} userName={userName} apiUrl={apiUrl} apiKey={apiKey} />
+                        }
+                    />
                     <Route path="/selector" />
                     <Route path="/profile" />
                 </Routes>
