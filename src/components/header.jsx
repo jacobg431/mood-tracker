@@ -1,25 +1,23 @@
 import { LogOut, User } from 'lucide-react';
-import { useNavigate } from "react-router";
-
+import { useNavigate } from 'react-router';
 
 export default function Header(props) {
-  
     const title = 'Welcome To Mood Tracker';
     const username = props.userName;
     const onSetUserName = props.onSetUserName;
     const navigate = useNavigate();
 
-    function onSelectorClick(){
-        navigate("/selector");
+    function onSelectorClick() {
+        navigate('/selector');
     }
 
-    function onProfileClick(){
-        navigate("/profile");
+    function onProfileClick() {
+        navigate('/profile');
     }
 
-    function onLogoutClick(){
-        navigate("/login");
-        onSetUserName(""); 
+    function onLogoutClick() {
+        navigate('/login');
+        onSetUserName('');
     }
 
     return (
@@ -32,30 +30,29 @@ export default function Header(props) {
                 <div className="flex items-center gap-4">
                     {username && (
                         <>
-                    <button
-                        onClick={onSelectorClick}
-                        className="flex items-center gap-2 rounded-lg border px-3 py-1.5 text-sm font-medium text-gray-700 transition hover:bg-gray-100"
-                    >
-                        Mood Selector
-                    </button>
-                    <button 
-                        className="flex items-center gap-2 rounded-lg border px-3 py-1.5 text-sm font-medium text-gray-700 transition hover:bg-gray-100"
-                        onClick={onProfileClick}
-                    >
-                        <User className="h-4 w-4" />
-                        <span className="font-medium">{username}</span>
-                    </button>
+                            <button
+                                onClick={onSelectorClick}
+                                className="flex items-center gap-2 rounded-lg border px-3 py-1.5 text-sm font-medium text-gray-700 transition hover:bg-gray-100"
+                            >
+                                Mood Selector
+                            </button>
+                            <button
+                                className="flex items-center gap-2 rounded-lg border px-3 py-1.5 text-sm font-medium text-gray-700 transition hover:bg-gray-100"
+                                onClick={onProfileClick}
+                            >
+                                <User className="h-4 w-4" />
+                                <span className="font-medium">{username}</span>
+                            </button>
 
-                    <button
-                        onClick={onLogoutClick}
-                        className="flex items-center gap-2 rounded-lg border px-3 py-1.5 text-sm font-medium text-gray-700 transition hover:bg-gray-100"
-                    >
-                        <LogOut className="h-4 w-4" />
-                        Logout
-                    </button>
-                     </>
+                            <button
+                                onClick={onLogoutClick}
+                                className="flex items-center gap-2 rounded-lg border px-3 py-1.5 text-sm font-medium text-gray-700 transition hover:bg-gray-100"
+                            >
+                                <LogOut className="h-4 w-4" />
+                                Logout
+                            </button>
+                        </>
                     )}
-
                 </div>
             </div>
         </header>
