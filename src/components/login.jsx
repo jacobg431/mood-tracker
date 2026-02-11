@@ -25,6 +25,7 @@ export default function Login(props) {
         onSetUserData({
             userId: user.id,
             userName: user.username,
+            affirmations: user.affirmations,
         });
 
         navigate('/profile');

@@ -20,6 +20,7 @@ export default function Header(props) {
         onSetUserData({
             userId: -1,
             userName: '',
+            affirmations: [],
         });
     }
 

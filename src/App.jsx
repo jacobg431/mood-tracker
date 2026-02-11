@@ -3,14 +3,15 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router';
 import Header from './components/header.jsx';
 import Login from './components/login.jsx';
 import NotFound from './components/notFound.jsx';
+import Selector from './components/selector.jsx';
 
 function App() {
     const [userData, setUserData] = useState(() => {
         try {
             const stored = localStorage.getItem('userData');
-            return stored ? JSON.parse(stored) : { userId: -1, userName: '' };
+            return stored ? JSON.parse(stored) : { userId: -1, userName: '', affirmations: [] };
         } catch {
-            return { userId: -1, userName: '' };
+            return { userId: -1, userName: '', affirmations: [] };
         }
     });
 
@@ -40,7 +41,12 @@ function App() {
                     }
                 />
 
-                <Route path="/selector" element={isLoggedIn ? <div>Selector</div> : <Navigate to="/login" replace />} />
+                <Route
+                    path="/selector"
+                    element={
+                        isLoggedIn ? <Selector onSetUserData={setUserData} userId={userData.userId} apiUrl={apiUrl} apiKey={apiKey} /> : <Navigate to="/login" replace />
+                    }
+                />
 
                 <Route path="/profile" element={isLoggedIn ? <div>Profile</div> : <Navigate to="/login" replace />} />
 
