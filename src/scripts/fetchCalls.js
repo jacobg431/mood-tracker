@@ -10,16 +10,34 @@ export function getAllMoods(baseUrl) {
     return jsonData;
 }
 
-export function getUser(baseUrl, userId) {
-    let jsonData;
-    fetch(baseUrl + 'affirmation_users/' + userId)
-        .then((response) => response.json())
-        .then((result) => (jsonData = result))
+export function getAllUsers(baseUrl) {
+    return fetch(baseUrl + 'affirmation_users/')
+        .then((response) => {
+            if (!response.ok) throw new Error('HTTP error: ' + response.status);
+            console.log(response);
+            return response.json();
+        })
         .catch((error) => {
-            console.error('Error getting users: ', error);
+            console.error('Error getting users:', error);
+            return [];
         });
+}
 
-    return jsonData;
+export function getUser(baseUrl, userId) {
+    return fetch(baseUrl + 'affirmation_users/' + userId)
+        .then((response) => {
+            if (response.status === 404) {
+                return null;
+            }
+            if (!response.ok) {
+                throw new Error('Network error');
+            }
+            return response.json();
+        })
+        .catch((error) => {
+            console.error('Error getting user:', error);
+            return null;
+        });
 }
 
 export function deleteUser(baseUrl, apiKey, userId) {
@@ -40,13 +58,12 @@ export function deleteUser(baseUrl, apiKey, userId) {
 }
 
 export function createNewUser(baseUrl, apiKey, newUsername) {
-    let jsonData;
     const data = {
         username: newUsername,
         affirmations: [],
     };
 
-    fetch(baseUrl, {
+    return fetch(baseUrl + 'affirmation_users/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -60,10 +77,10 @@ export function createNewUser(baseUrl, apiKey, newUsername) {
             }
             return response.json();
         })
-        .then((result) => (jsonData = result))
-        .catch((error) => console.error(error));
-
-    return jsonData;
+        .catch((error) => {
+            console.error('Error creating user:', error);
+            return null;
+        });
 }
 
 export function updateAffirmations(baseUrl, apiKey, userId, username, newAfirmations) {
@@ -92,4 +109,23 @@ export function updateAffirmations(baseUrl, apiKey, userId, username, newAfirmat
         .catch((error) => console.error(error));
 
     return jsonData;
+}
+
+export async function getUserByUsername(baseUrl, username) {
+    const users = await getAllUsers(baseUrl);
+
+    const normalized = username.trim();
+    const match = users.find((u) => u.username === normalized);
+
+    return match ?? null;
+}
+
+export async function getOrCreateUserByUsername(baseUrl, apiKey, username) {
+    const users = await getAllUsers(baseUrl);
+    const normalized = username.trim();
+
+    const existing = users.find((u) => u.username === normalized);
+    if (existing) return existing;
+
+    return await createNewUser(baseUrl, apiKey, normalized);
 }
