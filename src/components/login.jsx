@@ -24,7 +24,7 @@ export default function Login(props) {
 
         onSetUserData({
             userId: user.id,
-            userName: user.username
+            userName: user.username,
         });
 
         navigate('/profile');

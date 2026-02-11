@@ -19,7 +19,7 @@ export default function Header(props) {
         navigate('/login');
         onSetUserData({
             userId: -1,
-            userName: ''
+            userName: '',
         });
     }
 
