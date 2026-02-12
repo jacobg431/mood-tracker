@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
 import MoodOption from './moodOption';
 import { getAllMoods, updateAffirmations } from '../scripts/fetchCalls';
+import { useNavigate } from 'react-router';
 
 export default function Selector(props) {
     const { apiUrl, apiKey, userId, username } = props;
+    const navigate = useNavigate();
 
     const [moods, setMoods] = useState([]);
     const [selectedMoods, setSelectedMoods] = useState([]);
@@ -44,6 +46,7 @@ export default function Selector(props) {
 
         try {
             await updateAffirmations(apiUrl, apiKey, userId, username, newAffirmations);
+            navigate('/profile');
         } catch (err) {
             console.error('Failed to update affirmations:', err);
         }

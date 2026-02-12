@@ -82,11 +82,21 @@ export function createNewUser(baseUrl, apiKey, newUsername) {
         });
 }
 
-export function updateAffirmations(baseUrl, apiKey, userId, username, newAfirmations) {
+export async function updateAffirmations(baseUrl, apiKey, userId, username, newAfirmations) {
+
+    let user;
+    try {
+        user = await getUser(baseUrl, userId);
+    } catch { return; }
+    console.log(user);
+
+    const oldAffirmations = user.affirmations || [];
+    const updatedAffirmations = [...oldAffirmations, newAfirmations];
+    
     const data = {
         id: userId,
         username: username,
-        affirmations: newAfirmations,
+        affirmations: updatedAffirmations
     };
 
     return fetch(baseUrl + "affirmation_users/" + userId, {
