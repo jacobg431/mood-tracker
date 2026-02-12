@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router';
 export default function Header(props) {
     const title = 'Welcome To Mood Tracker';
     const username = props.userName;
-    const onSetUserName = props.onSetUserName;
+    const onSetUserData = props.onSetUserData;
     const navigate = useNavigate();
 
     function onSelectorClick() {
@@ -17,7 +17,11 @@ export default function Header(props) {
 
     function onLogoutClick() {
         navigate('/login');
-        onSetUserName('');
+        onSetUserData({
+            userId: -1,
+            userName: '',
+            affirmations: [],
+        });
     }
 
     return (

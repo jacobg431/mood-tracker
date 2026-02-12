@@ -3,7 +3,7 @@ import { getOrCreateUserByUsername } from '../scripts/fetchCalls';
 import { useNavigate } from 'react-router';
 
 export default function Login(props) {
-    const onSetUserName = props.onSetUserName;
+    const onSetUserData = props.onSetUserData;
     const apiKey = props.apiKey;
     const baseUrl = props.apiUrl;
     const navigate = useNavigate();
@@ -22,7 +22,11 @@ export default function Login(props) {
             return;
         }
 
-        onSetUserName(user.username);
+        onSetUserData({
+            userId: user.id,
+            userName: user.username,
+            affirmations: user.affirmations,
+        });
 
         navigate('/profile');
     };
