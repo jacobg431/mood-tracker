@@ -6,12 +6,10 @@ export default function MoodOption(props) {
 
     return (
         <>
-            <button 
-                type="button" 
+            <button
+                type="button"
                 className={`text-3xl p-4 rounded-lg border transition
-                    ${isSelected 
-                        ? 'bg-blue-500 text-white border-blue-600' 
-                        : 'bg-white hover:bg-gray-100'}
+                    ${isSelected ? 'bg-blue-500 text-white border-blue-600' : 'bg-white hover:bg-gray-100'}
                 `}
                 onClick={onClick}
             >

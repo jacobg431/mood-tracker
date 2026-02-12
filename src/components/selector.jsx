@@ -64,22 +64,16 @@ export default function Selector(props) {
                                     name={mood.name}
                                     emoji={mood.emoji}
                                     category={mood.category}
-                                    isSelected={selectedMoods.some(
-                                        (m) => m.id === mood.id
-                                    )}
+                                    isSelected={selectedMoods.some((m) => m.id === mood.id)}
                                     onClick={() => handleMoodClick(mood)}
                                 />
                             ))}
                     </div>
 
                     <div className="flex justify-between min-w-full items-center">
-                    <div>
+                        <div>
                             <span>Current Mood: </span>
-                            <input
-                                id="moodEntry"
-                                disabled
-                                value={moodEmojiString}
-                            />
+                            <input id="moodEntry" disabled value={moodEmojiString} />
                         </div>
 
                         <button
