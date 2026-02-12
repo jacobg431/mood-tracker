@@ -4,6 +4,7 @@ import Header from './components/header.jsx';
 import Login from './components/login.jsx';
 import NotFound from './components/notFound.jsx';
 import Selector from './components/selector.jsx';
+import Profile from './components/profile.jsx';
 
 function App() {
     const [userData, setUserData] = useState(() => {
@@ -58,7 +59,24 @@ function App() {
                     }
                 />
 
-                <Route path="/profile" element={isLoggedIn ? <div>Profile</div> : <Navigate to="/login" replace />} />
+                <Route 
+                    path="/profile" 
+                    element={
+                        isLoggedIn ?(
+                            <Profile
+                                onSetUserData={setUserData}
+                                userId={userData.userId}
+                                username={userData.userName}
+                                apiUrl={apiUrl}
+                                apiKey={apiKey}
+                            />
+
+
+                        ) : (
+                            <Navigate to="/login" replace />
+                        )
+                    } 
+                />
 
                 <Route path="/" element={<Navigate to={isLoggedIn ? '/selector' : '/login'} replace />} />
 
