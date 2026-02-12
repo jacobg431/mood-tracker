@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import { getUser, resetAffirmations } from '../scripts/fetchCalls';
+import positiveImg from "../images/positive.png";
+
 
 export default function Selector(props) {
     const { apiUrl, apiKey, userId, username } = props;
@@ -33,22 +35,35 @@ export default function Selector(props) {
 
     return (
         <>
-            <div className="h-full flex items-center justify-center bg-neutral-100 p-32">
-               <div className="bg-neutral-300 p-16 flex flex-col justify-between items-center">    
-                    <h3 className=''>
+            <div className="h-full flex gap-5 items-center justify-center bg-neutral-100 p-24 items-stretch">
+               <div className="bg-fuchsia-100 p-16 flex flex-col justify-between items-center items-stretch min-h-full rounded-3xl gap-4">    
+                    <h3 className='text-xl font-sans font-bold text-rose-800'>
                         Mood Log History
                     </h3>
-                    <div className="h-full p-16 flex flex-col gap-2">
+                    <div className="h-full justify-start flex flex-col gap-2">
                         {affirmations &&
                             affirmations.map((emojis, i) => (
-                                <div key={i}>
+                                <div className="text-xl" key={i}>
                                     {emojis}
                                 </div>
                             ))}
                     </div>
-                    <button onClick={onClearHistory} className="flex items-center gap-2 rounded-lg border px-3 py-1.5 text-sm font-medium text-gray-700 transition hover:bg-gray-100">
+                    <button onClick={onClearHistory} className="text-fuchsia-100 bg-fuchsia-300 flex items-center gap-2 rounded-lg p-3 text-md hover:cursor-pointer font-medium transition hover:bg-rose-300 hover:text-white">
                         Clear Mode Log History
                     </button>
+               </div>
+               <div className="bg-fuchsia-100 p-16 flex flex-col justify-between items-center items-stretch min-h-full rounded-3xl">
+                    <div className="text-rose-800 text-lg font-semibold">
+                            Your overall mode has beeen: 
+                    </div>
+                    <div>   
+                        <img className="max-h-120" src={positiveImg} alt="" />
+                    </div>
+                    <div>   
+                        Quote kommer her
+                    </div>
+
+
                </div>
             </div>
         </>
