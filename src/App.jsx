@@ -44,7 +44,17 @@ function App() {
                 <Route
                     path="/selector"
                     element={
-                        isLoggedIn ? <Selector onSetUserData={setUserData} userId={userData.userId} apiUrl={apiUrl} apiKey={apiKey} /> : <Navigate to="/login" replace />
+                        isLoggedIn ? (
+                            <Selector
+                                onSetUserData={setUserData}
+                                userId={userData.userId}
+                                username={userData.userName}
+                                apiUrl={apiUrl}
+                                apiKey={apiKey}
+                            />
+                        ) : (
+                            <Navigate to="/login" replace />
+                        )
                     }
                 />
 

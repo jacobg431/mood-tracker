@@ -1,10 +1,20 @@
 export default function MoodOption(props) {
     const name = props.name;
     const emoji = props.emoji;
+    const isSelected = props.isSelected;
+    const onClick = props.onClick;
 
     return (
         <>
-            <button className="flex items-center gap-2 rounded-lg border px-3 py-1.5 text-sm font-medium text-gray-700 transition hover:bg-gray-100">
+            <button 
+                type="button" 
+                className={`text-3xl p-4 rounded-lg border transition
+                    ${isSelected 
+                        ? 'bg-blue-500 text-white border-blue-600' 
+                        : 'bg-white hover:bg-gray-100'}
+                `}
+                onClick={onClick}
+            >
                 {emoji} {name}
             </button>
         </>

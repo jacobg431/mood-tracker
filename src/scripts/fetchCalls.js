@@ -1,20 +1,19 @@
 export function getAllMoods(baseUrl) {
-    let jsonData;
-    fetch(baseUrl + 'moods/')
-        .then((response) => response.json())
-        .then((result) => (jsonData = result))
+    return fetch(baseUrl + 'moods/')
+        .then((response) => {
+            if (!response.ok) throw new Error('HTTP error: ' + response.status);
+            return response.json();
+        })
         .catch((error) => {
             console.error('Error getting moods: ', error);
+            return [];
         });
-
-    return jsonData;
 }
 
 export function getAllUsers(baseUrl) {
     return fetch(baseUrl + 'affirmation_users/')
         .then((response) => {
             if (!response.ok) throw new Error('HTTP error: ' + response.status);
-            console.log(response);
             return response.json();
         })
         .catch((error) => {
@@ -84,14 +83,13 @@ export function createNewUser(baseUrl, apiKey, newUsername) {
 }
 
 export function updateAffirmations(baseUrl, apiKey, userId, username, newAfirmations) {
-    let jsonData;
     const data = {
         id: userId,
         username: username,
         affirmations: newAfirmations,
     };
 
-    fetch(baseUrl, {
+    return fetch(baseUrl, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -100,15 +98,10 @@ export function updateAffirmations(baseUrl, apiKey, userId, username, newAfirmat
         body: JSON.stringify(data),
     })
         .then((response) => {
-            if (!response.ok) {
-                throw new Error('HTTP error: ' + response.status);
-            }
+            if (!response.ok) throw new Error('HTTP error: ' + response.status);
             return response.json();
         })
-        .then((result) => (jsonData = result))
         .catch((error) => console.error(error));
-
-    return jsonData;
 }
 
 export async function getUserByUsername(baseUrl, username) {
