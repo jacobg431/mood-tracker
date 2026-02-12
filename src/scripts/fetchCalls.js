@@ -89,7 +89,7 @@ export function updateAffirmations(baseUrl, apiKey, userId, username, newAfirmat
         affirmations: newAfirmations,
     };
 
-    return fetch(baseUrl, {
+    return fetch(baseUrl + "affirmation_users/" + userId, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',

@@ -22,7 +22,6 @@ export default function Selector(props) {
     }, [apiUrl]);
 
     const handleMoodClick = (mood) => {
-        console.log("Hey")
         setSelectedMoods((prev) => {
             const alreadySelected = prev.find((m) => m.id === mood.id);
 
@@ -36,6 +35,8 @@ export default function Selector(props) {
         });
     };
 
+    const moodEmojiString = selectedMoods.map((m) => m.emoji).join(' ');
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -47,8 +48,6 @@ export default function Selector(props) {
             console.error('Failed to update affirmations:', err);
         }
     };
-
-    const moodEmojiString = selectedMoods.map((m) => m.emoji).join(' ');
 
     return (
         <>
