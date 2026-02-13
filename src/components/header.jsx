@@ -28,7 +28,7 @@ export default function Header(props) {
         "w-full border-b border-white/20 shadow-[0_10px_35px_-20px_rgba(0,0,0,0.45)]";
 
     const bgClass =
-        "relative overflow-hidden bg-gradient-to-r from-fuchsia-600 via-sky-500 to-emerald-500";
+        "relative overflow-hidden bg-gradient-to-r from-fuchsia-300 to-cyan-300";
 
     const overlayClass =
         "absolute inset-0 bg-white/10 backdrop-blur-[2px]";
@@ -52,7 +52,7 @@ export default function Header(props) {
 
     const btnGlass =
         btnBase +
-        " bg-white/15 text-white border border-white/25 backdrop-blur-md shadow-sm hover:bg-white/20";
+        " bg-white text-slate-900 border border-white/60 shadow-md hover:bg-white/90";
 
     const btnPrimary =
         btnBase +
