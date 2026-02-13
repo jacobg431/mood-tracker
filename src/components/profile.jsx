@@ -97,16 +97,18 @@ export default function Selector(props) {
         return findMostFrequentCategory(allSelectedCategories);
     }
 
-    const profilePageStyle = "bg-neutral-100 flex flex-col gap-8 h-full items-center justify-center py-24 md:flex-row md:items-stretch";
-    const sectionWrapperStyle = "bg-fuchsia-100 flex flex-col gap-4 justify-between h-170 p-12 rounded-3xl w-90";
-    const sectionHeadingStyle = "text-xl font-sans font-bold text-rose-800";
-    const sectionLightHeadingStyle = "text-rose-800 text-lg font-semibold";
-    const moodHistoryWrapperStyle = "flex flex-col gap-2 h-full justify-start";
-    const buttonStyle = "text-fuchsia-100 bg-fuchsia-300 flex items-center gap-2 rounded-lg p-3 text-md hover:cursor-pointer font-medium transition hover:bg-rose-300 hover:text-white";
-    const emojiTextStyle = "text-xl";
-    const quoteTextStyle = "text-lg italic";
-    const quoteAuthorStyle = "text-sm mt-2";
-    const imgStyle = "max-h-120";
+    const profilePageStyle =
+        'bg-neutral-100 flex flex-col gap-8 h-full items-center justify-center py-24 md:flex-row md:items-stretch';
+    const sectionWrapperStyle = 'bg-fuchsia-100 flex flex-col gap-4 justify-between h-170 p-12 rounded-3xl w-90';
+    const sectionHeadingStyle = 'text-xl font-sans font-bold text-rose-800';
+    const sectionLightHeadingStyle = 'text-rose-800 text-lg font-semibold';
+    const moodHistoryWrapperStyle = 'flex flex-col gap-2 h-full justify-start';
+    const buttonStyle =
+        'text-fuchsia-100 bg-fuchsia-300 flex items-center gap-2 rounded-lg p-3 text-md hover:cursor-pointer font-medium transition hover:bg-rose-300 hover:text-white';
+    const emojiTextStyle = 'text-xl';
+    const quoteTextStyle = 'text-lg italic';
+    const quoteAuthorStyle = 'text-sm mt-2';
+    const imgStyle = 'max-h-120';
 
     return (
         <>
@@ -124,10 +126,7 @@ export default function Selector(props) {
                             <div className={emojiTextStyle}> </div>
                         )}
                     </div>
-                    <button
-                        onClick={onClearHistory}
-                        className={buttonStyle}
-                    >
+                    <button onClick={onClearHistory} className={buttonStyle}>
                         Clear Mode Log History
                     </button>
                 </div>
