@@ -1,16 +1,88 @@
-# React + Vite
+# Mood Tracker – Setup & Run Guide
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 1. Prerequisites
 
-Currently, two official plugins are available:
+Ensure the following are installed:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Node.js**: v11.x
+- **npm**: v25.x
 
-## React Compiler
+Verify installed versions:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+node -v
+npm -v
+```
 
-## Expanding the ESLint configuration
+If the versions do not match, use a version manager such as nvm to install the required versions.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 2. Clone the Repositories
+
+You must run two projects.
+
+### 2.1 Frontend
+
+```bash
+git clone https://github.com/jacobg431/mood-tracker.git
+cd mood-tracker
+```
+
+### 2.2 Backend API
+
+```bash
+git clone https://github.com/jacobg431/frontend-assignment-api.git
+cd frontend-assignment-api
+
+```
+
+## 3. Configure Environment Variables
+
+In the root of the mood-tracker project, create a .env file:
+
+```bash
+VITE_BASE_URL=https://<url-to-running-instance-of-frontend-assignment-api>
+VITE_API_KEY=<64-character-string>
+```
+
+Example (local development)
+
+```bash
+VITE_BASE_URL=http://localhost:3000
+VITE_API_KEY=1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef
+```
+
+Notes:
+
+- VITE_BASE_URL must point to the running API instance.
+- VITE_API_KEY must be a valid 64-character key expected by the API.
+- Only environment variables prefixed with VITE\_ are exposed to the client by Vite.
+
+## 4. Install Dependencies
+
+From the mood-tracker root directory:
+
+```bash
+npm install
+```
+
+## 5. Run the Project (Development):
+
+```bash
+npm run dev
+```
+
+Vite will output a local development URL, typically:
+
+```bash
+http://localhost:5173
+```
+
+Open this URL in your browser.
+
+## 6. Build for production
+
+```bash
+npm run build
+```
+
+The optimized production build will be generated in the dist/ directory.
