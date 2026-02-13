@@ -4,8 +4,8 @@
 
 Ensure the following are installed:
 
-- **Node.js**: v11.x  
-- **npm**: v25.x  
+- **Node.js**: v11.x
+- **npm**: v25.x
 
 Verify installed versions:
 
@@ -45,19 +45,22 @@ VITE_API_KEY=<64-character-string>
 ```
 
 Example (local development)
+
 ```bash
 VITE_BASE_URL=http://localhost:3000
 VITE_API_KEY=1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef
 ```
 
 Notes:
+
 - VITE_BASE_URL must point to the running API instance.
 - VITE_API_KEY must be a valid 64-character key expected by the API.
-- Only environment variables prefixed with VITE_ are exposed to the client by Vite.
+- Only environment variables prefixed with VITE\_ are exposed to the client by Vite.
 
 ## 4. Install Dependencies
 
 From the mood-tracker root directory:
+
 ```bash
 npm install
 ```
