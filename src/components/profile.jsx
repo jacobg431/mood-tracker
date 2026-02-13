@@ -105,14 +105,15 @@ export default function Selector(props) {
                 <div className="bg-fuchsia-100 p-16 flex flex-col justify-between items-center items-stretch min-h-full rounded-3xl gap-4">
                     <h3 className="text-xl font-sans font-bold text-rose-800">Mood Log History</h3>
                     <div className="h-full justify-start flex flex-col gap-2">
-                        {affirmations ?
+                        {affirmations ? (
                             affirmations.map((moodIdArray, i) => (
                                 <div className="text-xl" key={i}>
                                     {moodIdArray.map((moodId) => findEmojiById(moodId))}
                                 </div>
                             ))
-                            :
-                            <div className ="text-xl"> </div>}
+                        ) : (
+                            <div className="text-xl"> </div>
+                        )}
                     </div>
                     <button
                         onClick={onClearHistory}
@@ -123,14 +124,10 @@ export default function Selector(props) {
                 </div>
                 <div className="bg-fuchsia-100 p-16 flex flex-col gap-2 justify-between items-center items-stretch min-h-full rounded-3xl max-w-100">
                     <div className="text-rose-800 text-lg font-semibold">
-                        Your overall mode has beeen: {overallMood || "Unknown"}
+                        Your overall mode has beeen: {overallMood || 'Unknown'}
                     </div>
                     <div>
-                        <img
-                            className="max-h-120"
-                            src={moodImgMap[overallMood] || neutralImg}
-                            alt=""
-                        />
+                        <img className="max-h-120" src={moodImgMap[overallMood] || neutralImg} alt="" />
                     </div>
                     <div>
                         {randomQuote ? (
