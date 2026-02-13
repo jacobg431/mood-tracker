@@ -21,11 +21,9 @@ export default function Selector(props) {
     useEffect(() => {
         const loadData = async () => {
             try {
-                // 1. Load moods first
                 const moodsData = await getAllMoods(apiUrl);
                 setMoods(moodsData);
 
-                // 2. Then load user
                 const user = await getUser(apiUrl, userId);
                 setAffirmations(user.affirmations);
 
@@ -99,12 +97,19 @@ export default function Selector(props) {
         return findMostFrequentCategory(allSelectedCategories);
     }
 
+    const profilePageStyle = "bg-neutral-100 flex flex-col gap-8 h-full items-center justify-center py-24 md:flex-row md:items-stretch";
+    const sectionWrapperStyle = "bg-fuchsia-100 flex flex-col gap-4 items-center items-stretch justify-between min-h-100 p-12 rounded-3xl w-90 md:h-full";
+    const sectionHeadingStyle = "text-xl font-sans font-bold text-rose-800";
+    const sectionLightHeadingStyle = "text-rose-800 text-lg font-semibold";
+    const moodHistoryWrapperStyle = "h-full justify-start flex flex-col gap-2";
+    const buttonStyle = "text-fuchsia-100 bg-fuchsia-300 flex items-center gap-2 rounded-lg p-3 text-md hover:cursor-pointer font-medium transition hover:bg-rose-300 hover:text-white";
+
     return (
         <>
-            <div className="h-full flex gap-5 items-center justify-center bg-neutral-100 p-24 items-stretch">
-                <div className="bg-fuchsia-100 p-16 flex flex-col justify-between items-center items-stretch min-h-full rounded-3xl gap-4">
-                    <h3 className="text-xl font-sans font-bold text-rose-800">Mood Log History</h3>
-                    <div className="h-full justify-start flex flex-col gap-2">
+            <div className={profilePageStyle}>
+                <div className={sectionWrapperStyle}>
+                    <h3 className={sectionHeadingStyle}>Mood Log History</h3>
+                    <div className={moodHistoryWrapperStyle}>
                         {affirmations ? (
                             affirmations.map((moodIdArray, i) => (
                                 <div className="text-xl" key={i}>
@@ -117,13 +122,13 @@ export default function Selector(props) {
                     </div>
                     <button
                         onClick={onClearHistory}
-                        className="text-fuchsia-100 bg-fuchsia-300 flex items-center gap-2 rounded-lg p-3 text-md hover:cursor-pointer font-medium transition hover:bg-rose-300 hover:text-white"
+                        className={buttonStyle}
                     >
                         Clear Mode Log History
                     </button>
                 </div>
-                <div className="bg-fuchsia-100 p-16 flex flex-col gap-2 justify-between items-center items-stretch min-h-full rounded-3xl max-w-100">
-                    <div className="text-rose-800 text-lg font-semibold">
+                <div className={sectionWrapperStyle}>
+                    <div className={sectionLightHeadingStyle}>
                         Your overall mode has beeen: {overallMood || 'Unknown'}
                     </div>
                     <div>
@@ -133,7 +138,7 @@ export default function Selector(props) {
                         {randomQuote ? (
                             <>
                                 <div className="text-lg italic">"{randomQuote.quote}"</div>
-                                <div className="text-sm mt-2">– {randomQuote.author}</div>
+                                <div className="text-sm mt-2">- {randomQuote.author}</div>
                             </>
                         ) : (
                             <div> </div>
