@@ -21,11 +21,9 @@ export default function Selector(props) {
     useEffect(() => {
         const loadData = async () => {
             try {
-                // 1. Load moods first
                 const moodsData = await getAllMoods(apiUrl);
                 setMoods(moodsData);
 
-                // 2. Then load user
                 const user = await getUser(apiUrl, userId);
                 setAffirmations(user.affirmations);
 
@@ -99,41 +97,51 @@ export default function Selector(props) {
         return findMostFrequentCategory(allSelectedCategories);
     }
 
+    const profilePageStyle =
+        'bg-neutral-100 flex flex-col gap-8 h-full items-center justify-center py-24 md:flex-row md:items-stretch';
+    const sectionWrapperStyle = 'bg-fuchsia-100 flex flex-col gap-4 justify-between h-170 p-12 rounded-3xl w-90';
+    const sectionHeadingStyle = 'text-xl font-sans font-bold text-rose-800';
+    const sectionLightHeadingStyle = 'text-rose-800 text-lg font-semibold';
+    const moodHistoryWrapperStyle = 'flex flex-col gap-2 h-full justify-start';
+    const buttonStyle =
+        'text-fuchsia-100 bg-fuchsia-300 flex items-center gap-2 rounded-lg p-3 text-md hover:cursor-pointer font-medium transition hover:bg-rose-300 hover:text-white';
+    const emojiTextStyle = 'text-xl';
+    const quoteTextStyle = 'text-lg italic';
+    const quoteAuthorStyle = 'text-sm mt-2';
+    const imgStyle = 'max-h-120';
+
     return (
         <>
-            <div className="h-full flex gap-5 items-center justify-center bg-neutral-100 p-24 items-stretch">
-                <div className="bg-fuchsia-100 p-16 flex flex-col justify-between items-center items-stretch min-h-full rounded-3xl gap-4">
-                    <h3 className="text-xl font-sans font-bold text-rose-800">Mood Log History</h3>
-                    <div className="h-full justify-start flex flex-col gap-2">
+            <div className={profilePageStyle}>
+                <div className={sectionWrapperStyle}>
+                    <h3 className={sectionHeadingStyle}>Mood Log History</h3>
+                    <div className={moodHistoryWrapperStyle}>
                         {affirmations ? (
                             affirmations.map((moodIdArray, i) => (
-                                <div className="text-xl" key={i}>
+                                <div className={emojiTextStyle} key={i}>
                                     {moodIdArray.map((moodId) => findEmojiById(moodId))}
                                 </div>
                             ))
                         ) : (
-                            <div className="text-xl"> </div>
+                            <div className={emojiTextStyle}> </div>
                         )}
                     </div>
-                    <button
-                        onClick={onClearHistory}
-                        className="text-fuchsia-100 bg-fuchsia-300 flex items-center gap-2 rounded-lg p-3 text-md hover:cursor-pointer font-medium transition hover:bg-rose-300 hover:text-white"
-                    >
+                    <button onClick={onClearHistory} className={buttonStyle}>
                         Clear Mode Log History
                     </button>
                 </div>
-                <div className="bg-fuchsia-100 p-16 flex flex-col gap-2 justify-between items-center items-stretch min-h-full rounded-3xl max-w-100">
-                    <div className="text-rose-800 text-lg font-semibold">
+                <div className={sectionWrapperStyle}>
+                    <div className={sectionLightHeadingStyle}>
                         Your overall mode has beeen: {overallMood || 'Unknown'}
                     </div>
                     <div>
-                        <img className="max-h-120" src={moodImgMap[overallMood] || neutralImg} alt="" />
+                        <img className={imgStyle} src={moodImgMap[overallMood] || neutralImg} alt="" />
                     </div>
                     <div>
                         {randomQuote ? (
                             <>
-                                <div className="text-lg italic">"{randomQuote.quote}"</div>
-                                <div className="text-sm mt-2">– {randomQuote.author}</div>
+                                <div className={quoteTextStyle}>"{randomQuote.quote}"</div>
+                                <div className={quoteAuthorStyle}>- {randomQuote.author}</div>
                             </>
                         ) : (
                             <div> </div>
