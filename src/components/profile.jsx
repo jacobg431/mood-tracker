@@ -103,6 +103,10 @@ export default function Selector(props) {
     const sectionLightHeadingStyle = "text-rose-800 text-lg font-semibold";
     const moodHistoryWrapperStyle = "flex flex-col gap-2 h-full justify-start";
     const buttonStyle = "text-fuchsia-100 bg-fuchsia-300 flex items-center gap-2 rounded-lg p-3 text-md hover:cursor-pointer font-medium transition hover:bg-rose-300 hover:text-white";
+    const emojiTextStyle = "text-xl";
+    const quoteTextStyle = "text-lg italic";
+    const quoteAuthorStyle = "text-sm mt-2";
+    const imgStyle = "max-h-120";
 
     return (
         <>
@@ -112,12 +116,12 @@ export default function Selector(props) {
                     <div className={moodHistoryWrapperStyle}>
                         {affirmations ? (
                             affirmations.map((moodIdArray, i) => (
-                                <div className="text-xl" key={i}>
+                                <div className={emojiTextStyle} key={i}>
                                     {moodIdArray.map((moodId) => findEmojiById(moodId))}
                                 </div>
                             ))
                         ) : (
-                            <div className="text-xl"> </div>
+                            <div className={emojiTextStyle}> </div>
                         )}
                     </div>
                     <button
@@ -132,13 +136,13 @@ export default function Selector(props) {
                         Your overall mode has beeen: {overallMood || 'Unknown'}
                     </div>
                     <div>
-                        <img className="max-h-120" src={moodImgMap[overallMood] || neutralImg} alt="" />
+                        <img className={imgStyle} src={moodImgMap[overallMood] || neutralImg} alt="" />
                     </div>
                     <div>
                         {randomQuote ? (
                             <>
-                                <div className="text-lg italic">"{randomQuote.quote}"</div>
-                                <div className="text-sm mt-2">- {randomQuote.author}</div>
+                                <div className={quoteTextStyle}>"{randomQuote.quote}"</div>
+                                <div className={quoteAuthorStyle}>- {randomQuote.author}</div>
                             </>
                         ) : (
                             <div> </div>
