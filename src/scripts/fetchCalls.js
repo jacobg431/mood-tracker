@@ -82,6 +82,27 @@ export function createNewUser(baseUrl, apiKey, newUsername) {
         });
 }
 
+export async function resetAffirmations(baseUrl, apiKey, userId, username) {
+    const data = {
+        id: userId,
+        username: username,
+        affirmations: [],
+    };
+    return fetch(baseUrl + 'affirmation_users/' + userId, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-API-KEY': apiKey,
+        },
+        body: JSON.stringify(data),
+    })
+        .then((response) => {
+            if (!response.ok) throw new Error('HTTP error: ' + response.status);
+            return response.json();
+        })
+        .catch((error) => console.error(error));
+}
+
 export async function updateAffirmations(baseUrl, apiKey, userId, username, newAfirmations) {
     let user;
     try {
@@ -89,7 +110,6 @@ export async function updateAffirmations(baseUrl, apiKey, userId, username, newA
     } catch {
         return;
     }
-    console.log(user);
 
     const oldAffirmations = user.affirmations || [];
     const updatedAffirmations = [...oldAffirmations, newAfirmations];

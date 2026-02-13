@@ -1,0 +1,182 @@
+[
+    {
+        "id": 1,
+        "category": "Positive",
+        "quote": "Keep your face always toward the sunshine—and shadows will fall behind you.",
+        "author": "Walt Whitman"
+    },
+    {
+        "id": 2,
+        "category": "Positive",
+        "quote": "Happiness depends upon ourselves.",
+        "author": "Aristotle"
+    },
+    {
+        "id": 3,
+        "category": "Positive",
+        "quote": "Believe you can and you're halfway there.",
+        "author": "Theodore Roosevelt"
+    },
+    {
+        "id": 4,
+        "category": "Positive",
+        "quote": "Do what you can, with what you have, where you are.",
+        "author": "Theodore Roosevelt"
+    },
+    {
+        "id": 5,
+        "category": "Positive",
+        "quote": "In the middle of difficulty lies opportunity.",
+        "author": "Albert Einstein"
+    },
+    {
+        "id": 6,
+        "category": "Positive",
+        "quote": "Act as if what you do makes a difference. It does.",
+        "author": "William James"
+    },
+    {
+        "id": 7,
+        "category": "Positive",
+        "quote": "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+        "author": "Winston Churchill"
+    },
+    {
+        "id": 8,
+        "category": "Positive",
+        "quote": "What lies behind us and what lies before us are tiny matters compared to what lies within us.",
+        "author": "Ralph Waldo Emerson"
+    },
+    {
+        "id": 9,
+        "category": "Positive",
+        "quote": "You are never too old to set another goal or to dream a new dream.",
+        "author": "C. S. Lewis"
+    },
+    {
+        "id": 10,
+        "category": "Positive",
+        "quote": "Every day may not be good, but there is something good in every day.",
+        "author": "Unknown"
+    },
+    {
+        "id": 11,
+        "category": "Neutral",
+        "quote": "Nothing in life is to be feared, it is only to be understood.",
+        "author": "Marie Curie"
+    },
+    {
+        "id": 12,
+        "category": "Neutral",
+        "quote": "The journey of a thousand miles begins with one step.",
+        "author": "Lao Tzu"
+    },
+    {
+        "id": 13,
+        "category": "Neutral",
+        "quote": "This too shall pass.",
+        "author": "Persian Proverb"
+    },
+    {
+        "id": 14,
+        "category": "Neutral",
+        "quote": "Life is really simple, but we insist on making it complicated.",
+        "author": "Confucius"
+    },
+    {
+        "id": 15,
+        "category": "Neutral",
+        "quote": "Wherever you are, be all there.",
+        "author": "Jim Elliot"
+    },
+    {
+        "id": 16,
+        "category": "Neutral",
+        "quote": "The present moment is the only moment available to us.",
+        "author": "Thich Nhat Hanh"
+    },
+    {
+        "id": 17,
+        "category": "Neutral",
+        "quote": "Adopt the pace of nature: her secret is patience.",
+        "author": "Ralph Waldo Emerson"
+    },
+    {
+        "id": 18,
+        "category": "Neutral",
+        "quote": "Silence is a source of great strength.",
+        "author": "Lao Tzu"
+    },
+    {
+        "id": 19,
+        "category": "Neutral",
+        "quote": "Do not anticipate trouble, or worry about what may never happen.",
+        "author": "Benjamin Franklin"
+    },
+    {
+        "id": 20,
+        "category": "Neutral",
+        "quote": "Peace begins with a smile.",
+        "author": "Mother Teresa"
+    },
+    {
+        "id": 21,
+        "category": "Negative",
+        "quote": "In the depth of winter, I finally learned that within me there lay an invincible summer.",
+        "author": "Albert Camus"
+    },
+    {
+        "id": 22,
+        "category": "Negative",
+        "quote": "Rock bottom became the solid foundation on which I rebuilt my life.",
+        "author": "J. K. Rowling"
+    },
+    {
+        "id": 23,
+        "category": "Negative",
+        "quote": "Out of difficulties grow miracles.",
+        "author": "Jean de La Bruyère"
+    },
+    {
+        "id": 24,
+        "category": "Negative",
+        "quote": "Even the darkest night will end and the sun will rise.",
+        "author": "Victor Hugo"
+    },
+    {
+        "id": 25,
+        "category": "Negative",
+        "quote": "Stars can’t shine without darkness.",
+        "author": "Unknown"
+    },
+    {
+        "id": 26,
+        "category": "Negative",
+        "quote": "Difficulties strengthen the mind, as labor does the body.",
+        "author": "Seneca"
+    },
+    {
+        "id": 27,
+        "category": "Negative",
+        "quote": "Turn your wounds into wisdom.",
+        "author": "Oprah Winfrey"
+    },
+    {
+        "id": 28,
+        "category": "Negative",
+        "quote": "Every adversity carries with it the seed of an equal or greater benefit.",
+        "author": "Napoleon Hill"
+    },
+    {
+        "id": 29,
+        "category": "Negative",
+        "quote": "When everything seems to be going against you, remember that the airplane takes off against the wind.",
+        "author": "Henry Ford"
+    },
+    {
+        "id": 30,
+        "category": "Negative",
+        "quote": "Hardships often prepare ordinary people for an extraordinary destiny.",
+        "author": "C. S. Lewis"
+    }
+]

@@ -38,11 +38,12 @@ export default function Selector(props) {
     };
 
     const moodEmojiString = selectedMoods.map((m) => m.emoji).join(' ');
+    const selectedMoodIds = selectedMoods.map((m) => m.id);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const newAffirmations = moodEmojiString;
+        const newAffirmations = selectedMoodIds;
 
         try {
             await updateAffirmations(apiUrl, apiKey, userId, username, newAffirmations);
