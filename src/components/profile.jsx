@@ -1,11 +1,27 @@
 import { useState, useEffect } from 'react';
 import { getUser, resetAffirmations, getAllMoods } from '../scripts/fetchCalls';
 import positiveImg from '../images/positive.png';
+import negativeImg from '../images/negative.png';
+import neutralImg from '../images/neutral.png';
+import quotes from '../data/quotes.json';
+import { useMemo } from 'react';
 
 export default function Selector(props) {
     const { apiUrl, apiKey, userId, username } = props;
     const [affirmations, setAffirmations] = useState([]);
     const [moods, setMoods] = useState([]);
+    const overallMood = findOverallMood();
+
+    const moodImgMap = {
+        Positive: positiveImg,
+        Negative: negativeImg,
+        Neutral: neutralImg,
+    };
+
+    const randomQuote = useMemo(() => {
+        if (!overallMood) return null;
+        return getRandomQuote(overallMood);
+    }, [overallMood]);
 
     useEffect(() => {
         const loadData = async () => {
@@ -46,32 +62,41 @@ export default function Selector(props) {
         return category;
     }
 
-    function findMostFrequentCategory(allSelectedCategories){
+    function findMostFrequentCategory(allSelectedCategories) {
         const frequencyMap = allSelectedCategories.reduce((acc, val) => {
             acc[val] = (acc[val] || 0) + 1;
             return acc;
         }, {});
-        const mostFrequentCategory = Object.keys(frequencyMap).reduce((a, b) => {
-            return frequencyMap[a] > frequencyMap[b] ? a : b;
-        });
-        return mostFrequentCategory;
-    
+
+        const entries = Object.entries(frequencyMap);
+        if (entries.length === 0) return '';
+
+        const maxCount = Math.max(...entries.map(([, count]) => count));
+
+        const topCategories = entries.filter(([, count]) => count === maxCount).map(([category]) => category);
+
+        if (topCategories.length > 1) return 'Neutral';
+
+        return topCategories[0];
     }
 
     function findOverallMood() {
-        if(affirmations.length===0){
-            return ""; 
-        }
+        if (affirmations.length === 0) return '';
 
-        let allSelectedCategories = [];
-        affirmations.map((moodIdArray, i) =>
-            moodIdArray.map((moodId) => {
-                allSelectedCategories.push(findCategoryById(moodId));
-            }),
+        const allSelectedCategories = affirmations.flatMap((moodIdArray) =>
+            moodIdArray.map((moodId) => findCategoryById(moodId)),
         );
 
-        return findMostFrequentCategory(allSelectedCategories); 
-        
+        return findMostFrequentCategory(allSelectedCategories);
+    }
+
+    function getRandomQuote(category) {
+        const filteredQuotes = quotes.filter((q) => q.category === category);
+
+        if (filteredQuotes.length === 0) return null;
+
+        const randomIndex = Math.floor(Math.random() * filteredQuotes.length);
+        return filteredQuotes[randomIndex];
     }
 
     return (
@@ -94,14 +119,27 @@ export default function Selector(props) {
                         Clear Mode Log History
                     </button>
                 </div>
-                <div className="bg-fuchsia-100 p-16 flex flex-col justify-between items-center items-stretch min-h-full rounded-3xl">
+                <div className="bg-fuchsia-100 p-16 flex flex-col justify-between items-center items-stretch min-h-full rounded-3xl max-w-100">
                     <div className="text-rose-800 text-lg font-semibold">
                         Your overall mode has beeen: {affirmations && moods && findOverallMood()}
                     </div>
                     <div>
-                        <img className="max-h-120" src={positiveImg} alt="" />
+                        <img
+                            className="max-h-120"
+                            src={affirmations && moods ? moodImgMap[findOverallMood()] : neutralImg}
+                            alt=""
+                        />
                     </div>
-                    <div>Quote kommer her</div>
+                    <div>
+                        {randomQuote ? (
+                            <>
+                                <div className="text-lg italic">"{randomQuote.quote}"</div>
+                                <div className="text-sm mt-2">– {randomQuote.author}</div>
+                            </>
+                        ) : (
+                            <div>No quote available</div>
+                        )}
+                    </div>
                 </div>
             </div>
         </>
