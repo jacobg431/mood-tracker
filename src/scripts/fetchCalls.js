@@ -82,11 +82,11 @@ export function createNewUser(baseUrl, apiKey, newUsername) {
         });
 }
 
-export async function resetAffirmations(baseUrl, apiKey, userId, username){
+export async function resetAffirmations(baseUrl, apiKey, userId, username) {
     const data = {
         id: userId,
         username: username,
-        affirmations: []
+        affirmations: [],
     };
     return fetch(baseUrl + 'affirmation_users/' + userId, {
         method: 'PUT',
@@ -102,7 +102,6 @@ export async function resetAffirmations(baseUrl, apiKey, userId, username){
         })
         .catch((error) => console.error(error));
 }
-
 
 export async function updateAffirmations(baseUrl, apiKey, userId, username, newAfirmations) {
     let user;

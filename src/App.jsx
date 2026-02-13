@@ -59,10 +59,10 @@ function App() {
                     }
                 />
 
-                <Route 
-                    path="/profile" 
+                <Route
+                    path="/profile"
                     element={
-                        isLoggedIn ?(
+                        isLoggedIn ? (
                             <Profile
                                 onSetUserData={setUserData}
                                 userId={userData.userId}
@@ -70,12 +70,10 @@ function App() {
                                 apiUrl={apiUrl}
                                 apiKey={apiKey}
                             />
-
-
                         ) : (
                             <Navigate to="/login" replace />
                         )
-                    } 
+                    }
                 />
 
                 <Route path="/" element={<Navigate to={isLoggedIn ? '/selector' : '/login'} replace />} />
