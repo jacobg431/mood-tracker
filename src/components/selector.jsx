@@ -54,7 +54,7 @@ export default function Selector(props) {
     };
 
     const layoutClass =
-        'min-h-screen flex items-center justify-center bg-gradient-to-b from-slate-50 via-slate-50 to-cyan-50 px-6 py-10';
+        'h-full flex items-center justify-center bg-gradient-to-b from-slate-50 via-slate-50 to-cyan-50 py-24';
 
     const formClass =
         'relative w-full max-w-5xl rounded-3xl border border-white/60 bg-green-100/70 shadow-[0_20px_80px_-30px_rgba(0,0,0,0.25)] backdrop-blur-xl';
@@ -80,7 +80,7 @@ export default function Selector(props) {
 
     const selectedListWrapperClass = 'max-h-24 overflow-y-auto';
     const selectedListClass = 'flex flex-wrap gap-2';
-    const placeholderClass = 'text-slate-400 text-lg';
+    const placeholderClass = 'text-slate-400 text-2xl py-1';
 
     const selectedMoodClass =
         'inline-flex items-center justify-center rounded-xl bg-cyan-50 px-2.5 py-1 text-2xl shadow-[0_6px_18px_-12px_rgba(14,116,144,0.6)]';
