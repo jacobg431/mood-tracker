@@ -8,9 +8,14 @@ export default function MoodOption(props) {
         <>
             <button
                 type="button"
-                className={`text-3xl p-4 rounded-lg border transition
-                    ${isSelected ? 'bg-blue-500 text-white border-blue-600' : 'bg-white hover:bg-gray-100'}
-                `}
+                className={`text-2xl px-4 py-2.5 rounded-xl border transition
+          ${
+              isSelected
+                  ? 'bg-cyan-500 text-white border-cyan-600 shadow-sm'
+                  : 'bg-white hover:bg-cyan-50 hover:border-cyan-200'
+          }
+          hover:-translate-y-0.5 active:translate-y-0
+        `}
                 onClick={onClick}
             >
                 {emoji} {name}
