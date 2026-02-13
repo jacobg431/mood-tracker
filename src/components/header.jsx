@@ -2,7 +2,7 @@ import { LogOut, User } from 'lucide-react';
 import { useNavigate } from 'react-router';
 
 export default function Header(props) {
-    const title = 'Welcome To Mood Tracker';
+    const title = 'Mood Tracker';
     const username = props.userName;
     const onSetUserData = props.onSetUserData;
     const navigate = useNavigate();
@@ -24,39 +24,57 @@ export default function Header(props) {
         });
     }
 
+    const headerClass = 'w-full border-b border-white/20 shadow-[0_10px_35px_-20px_rgba(0,0,0,0.45)]';
+
+    const bgClass = 'relative overflow-hidden bg-gradient-to-r from-fuchsia-300 to-cyan-300';
+
+    const overlayClass = 'absolute inset-0 bg-white/10 backdrop-blur-[2px]';
+
+    const containerClass = 'relative mx-auto flex h-20 max-w-7xl items-center justify-between px-6';
+
+    const titleClass = 'text-3xl sm:text-4xl font-extrabold tracking-tight text-white/95 drop-shadow';
+
+    const actionsClass = 'flex items-center gap-3';
+
+    const iconClass = 'h-5 w-5';
+
+    const btnBase =
+        'inline-flex items-center gap-2 rounded-2xl px-4 py-2 text-base font-semibold ' +
+        'transition active:scale-[0.98] focus:outline-none focus-visible:ring-4 focus-visible:ring-white/30';
+
+    const btnGlass = btnBase + ' bg-white text-slate-900 border border-white/60 shadow-md hover:bg-white/90';
+
+    const btnPrimary = btnBase + ' bg-white text-slate-900 border border-white/60 shadow-md hover:bg-white/90';
+
+    const btnLogout = btnBase + ' bg-slate-900/70 text-white border border-white/10 shadow-md hover:bg-slate-900/85';
+
     return (
-        <header className="w-full border-b bg-white">
-            <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4">
-                {/* Left: Logo / Title */}
-                <div className="text-xl font-semibold tracking-tight text-gray-900">{title}</div>
+        <header className={headerClass}>
+            <div className={bgClass}>
+                <div className={overlayClass} />
 
-                {/* Right: User info + Logout */}
-                <div className="flex items-center gap-4">
-                    {username && (
-                        <>
-                            <button
-                                onClick={onSelectorClick}
-                                className="flex items-center gap-2 rounded-lg border px-3 py-1.5 text-sm font-medium text-gray-700 transition hover:bg-gray-100"
-                            >
-                                Mood Selector
-                            </button>
-                            <button
-                                className="flex items-center gap-2 rounded-lg border px-3 py-1.5 text-sm font-medium text-gray-700 transition hover:bg-gray-100"
-                                onClick={onProfileClick}
-                            >
-                                <User className="h-4 w-4" />
-                                <span className="font-medium">{username}</span>
-                            </button>
+                <div className={containerClass}>
+                    <div className={titleClass}>{title}</div>
 
-                            <button
-                                onClick={onLogoutClick}
-                                className="flex items-center gap-2 rounded-lg border px-3 py-1.5 text-sm font-medium text-gray-700 transition hover:bg-gray-100"
-                            >
-                                <LogOut className="h-4 w-4" />
-                                Logout
-                            </button>
-                        </>
-                    )}
+                    <div className={actionsClass}>
+                        {username && (
+                            <>
+                                <button onClick={onSelectorClick} className={btnGlass}>
+                                    Mood Selector
+                                </button>
+
+                                <button onClick={onProfileClick} className={btnPrimary}>
+                                    <User className={iconClass} />
+                                    {username}
+                                </button>
+
+                                <button onClick={onLogoutClick} className={btnLogout}>
+                                    <LogOut className={iconClass} />
+                                    Logout
+                                </button>
+                            </>
+                        )}
+                    </div>
                 </div>
             </div>
         </header>
