@@ -60,15 +60,12 @@ export default function Selector(props) {
                     onSubmit={handleSubmit}
                     className="relative w-full max-w-5xl rounded-3xl border border-white/60 bg-green-100/70 shadow-[0_20px_80px_-30px_rgba(0,0,0,0.25)] backdrop-blur-xl"
                 >
-
                     <div className="p-8 sm:p-10">
                         <div className="mb-8 flex flex-col gap-2">
                             <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-sky-800 ">
                                 Mood selector
                             </h1>
-                            <p className="text-slate-600 text-lg sm:text-xl">
-                                How do you feel today?
-                            </p>
+                            <p className="text-slate-600 text-lg sm:text-xl">How do you feel today?</p>
                         </div>
 
                         <div className="rounded-2xl border border-cyan-500 bg-gradient-to-b from-cyan-50/70 to-white/40 p-5 sm:p-6">
@@ -90,9 +87,7 @@ export default function Selector(props) {
                         <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                             <div className="flex-1">
                                 <div className="flex items-baseline gap-3">
-                                    <span className="text-2xl sm:text-3xl font-bold text-sky-800">
-                                        Current Mood
-                                    </span>
+                                    <span className="text-2xl sm:text-3xl font-bold text-sky-800">Current Mood</span>
                                     <span className="text-slate-500 text-sm sm:text-base">
                                         ({selectedMoods.length} selected)
                                     </span>
@@ -119,7 +114,6 @@ export default function Selector(props) {
                                         </div>
                                     </div>
 
-                                    
                                     <input
                                         className="sr-only"
                                         id="moodEntry"
@@ -140,10 +134,7 @@ export default function Selector(props) {
                                            focus:outline-none focus-visible:ring-4 focus-visible:ring-cyan-300/70"
                             >
                                 <span className="transition group-hover:translate-x-[1px]">Submit</span>
-                                <span
-                                    aria-hidden="true"
-                                    className="text-white/90 transition group-hover:translate-x-1"
-                                >
+                                <span aria-hidden="true" className="text-white/90 transition group-hover:translate-x-1">
                                     →
                                 </span>
                             </button>
