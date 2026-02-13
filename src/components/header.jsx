@@ -1,67 +1,52 @@
-import { LogOut, User } from "lucide-react";
-import { useNavigate } from "react-router";
+import { LogOut, User } from 'lucide-react';
+import { useNavigate } from 'react-router';
 
 export default function Header(props) {
-    const title = "Mood Tracker";
+    const title = 'Mood Tracker';
     const username = props.userName;
     const onSetUserData = props.onSetUserData;
     const navigate = useNavigate();
 
     function onSelectorClick() {
-        navigate("/selector");
+        navigate('/selector');
     }
 
     function onProfileClick() {
-        navigate("/profile");
+        navigate('/profile');
     }
 
     function onLogoutClick() {
-        navigate("/login");
+        navigate('/login');
         onSetUserData({
             userId: -1,
-            userName: "",
+            userName: '',
             affirmations: [],
         });
     }
 
-    const headerClass =
-        "w-full border-b border-white/20 shadow-[0_10px_35px_-20px_rgba(0,0,0,0.45)]";
+    const headerClass = 'w-full border-b border-white/20 shadow-[0_10px_35px_-20px_rgba(0,0,0,0.45)]';
 
-    const bgClass =
-        "relative overflow-hidden bg-gradient-to-r from-fuchsia-300 to-cyan-300";
+    const bgClass = 'relative overflow-hidden bg-gradient-to-r from-fuchsia-300 to-cyan-300';
 
-    const overlayClass =
-        "absolute inset-0 bg-white/10 backdrop-blur-[2px]";
+    const overlayClass = 'absolute inset-0 bg-white/10 backdrop-blur-[2px]';
 
-    const containerClass =
-        "relative mx-auto flex h-20 max-w-7xl items-center justify-between px-6";
+    const containerClass = 'relative mx-auto flex h-20 max-w-7xl items-center justify-between px-6';
 
-    const titleClass =
-        "text-3xl sm:text-4xl font-extrabold tracking-tight text-white/95 drop-shadow";
+    const titleClass = 'text-3xl sm:text-4xl font-extrabold tracking-tight text-white/95 drop-shadow';
 
-    const actionsClass =
-        "flex items-center gap-3";
+    const actionsClass = 'flex items-center gap-3';
 
-    const iconClass =
-        "h-5 w-5";
-
+    const iconClass = 'h-5 w-5';
 
     const btnBase =
-        "inline-flex items-center gap-2 rounded-2xl px-4 py-2 text-base font-semibold " +
-        "transition active:scale-[0.98] focus:outline-none focus-visible:ring-4 focus-visible:ring-white/30";
+        'inline-flex items-center gap-2 rounded-2xl px-4 py-2 text-base font-semibold ' +
+        'transition active:scale-[0.98] focus:outline-none focus-visible:ring-4 focus-visible:ring-white/30';
 
-    const btnGlass =
-        btnBase +
-        " bg-white text-slate-900 border border-white/60 shadow-md hover:bg-white/90";
+    const btnGlass = btnBase + ' bg-white text-slate-900 border border-white/60 shadow-md hover:bg-white/90';
 
-    const btnPrimary =
-        btnBase +
-        " bg-white text-slate-900 border border-white/60 shadow-md hover:bg-white/90";
+    const btnPrimary = btnBase + ' bg-white text-slate-900 border border-white/60 shadow-md hover:bg-white/90';
 
-    const btnLogout =
-        btnBase +
-        " bg-slate-900/70 text-white border border-white/10 shadow-md hover:bg-slate-900/85";
-
+    const btnLogout = btnBase + ' bg-slate-900/70 text-white border border-white/10 shadow-md hover:bg-slate-900/85';
 
     return (
         <header className={headerClass}>
