@@ -40,6 +40,40 @@ export default function Selector(props) {
         }
     };
 
+    function findCategoryById(moodId) {
+        const foundMood = moods.find((mood) => mood.id === moodId);
+        const category = foundMood.category;
+        return category;
+    }
+
+    function findMostFrequentCategory(allSelectedCategories){
+        const frequencyMap = allSelectedCategories.reduce((acc, val) => {
+            acc[val] = (acc[val] || 0) + 1;
+            return acc;
+        }, {});
+        const mostFrequentCategory = Object.keys(frequencyMap).reduce((a, b) => {
+            return frequencyMap[a] > frequencyMap[b] ? a : b;
+        });
+        return mostFrequentCategory;
+    
+    }
+
+    function findOverallMood() {
+        if(affirmations.length===0){
+            return ""; 
+        }
+
+        let allSelectedCategories = [];
+        affirmations.map((moodIdArray, i) =>
+            moodIdArray.map((moodId) => {
+                allSelectedCategories.push(findCategoryById(moodId));
+            }),
+        );
+
+        return findMostFrequentCategory(allSelectedCategories); 
+        
+    }
+
     return (
         <>
             <div className="h-full flex gap-5 items-center justify-center bg-neutral-100 p-24 items-stretch">
@@ -61,7 +95,9 @@ export default function Selector(props) {
                     </button>
                 </div>
                 <div className="bg-fuchsia-100 p-16 flex flex-col justify-between items-center items-stretch min-h-full rounded-3xl">
-                    <div className="text-rose-800 text-lg font-semibold">Your overall mode has beeen:</div>
+                    <div className="text-rose-800 text-lg font-semibold">
+                        Your overall mode has beeen: {affirmations && moods && findOverallMood()}
+                    </div>
                     <div>
                         <img className="max-h-120" src={positiveImg} alt="" />
                     </div>
