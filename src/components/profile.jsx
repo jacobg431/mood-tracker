@@ -4,24 +4,19 @@ import positiveImg from '../images/positive.png';
 import negativeImg from '../images/negative.png';
 import neutralImg from '../images/neutral.png';
 import quotes from '../data/quotes.json';
-import { useMemo } from 'react';
 
 export default function Selector(props) {
     const { apiUrl, apiKey, userId, username } = props;
     const [affirmations, setAffirmations] = useState([]);
     const [moods, setMoods] = useState([]);
-    const overallMood = findOverallMood();
+    const [randomQuote, setRandomQuote] = useState(null);
+    const overallMood = affirmations.length && moods.length ? findOverallMood() : '';
 
     const moodImgMap = {
         Positive: positiveImg,
         Negative: negativeImg,
         Neutral: neutralImg,
     };
-
-    const randomQuote = useMemo(() => {
-        if (!overallMood) return null;
-        return getRandomQuote(overallMood);
-    }, [overallMood]);
 
     useEffect(() => {
         const loadData = async () => {
@@ -33,13 +28,27 @@ export default function Selector(props) {
                 // 2. Then load user
                 const user = await getUser(apiUrl, userId);
                 setAffirmations(user.affirmations);
+
+                if (!overallMood) {
+                    setRandomQuote(null);
+                    return;
+                }
+
+                const filtered = quotes.filter((q) => q.category === overallMood);
+                if (filtered.length === 0) {
+                    setRandomQuote(null);
+                    return;
+                }
+
+                const idx = Math.floor(Math.random() * filtered.length);
+                setRandomQuote(filtered[idx]);
             } catch (error) {
                 console.error('Failed to load data:', error);
             }
         };
 
         loadData();
-    }, [apiUrl, userId]);
+    }, [apiUrl, userId, overallMood]);
 
     function findEmojiById(moodId) {
         const foundMood = moods.find((mood) => mood.id === moodId);
@@ -90,27 +99,20 @@ export default function Selector(props) {
         return findMostFrequentCategory(allSelectedCategories);
     }
 
-    function getRandomQuote(category) {
-        const filteredQuotes = quotes.filter((q) => q.category === category);
-
-        if (filteredQuotes.length === 0) return null;
-
-        const randomIndex = Math.floor(Math.random() * filteredQuotes.length);
-        return filteredQuotes[randomIndex];
-    }
-
     return (
         <>
             <div className="h-full flex gap-5 items-center justify-center bg-neutral-100 p-24 items-stretch">
                 <div className="bg-fuchsia-100 p-16 flex flex-col justify-between items-center items-stretch min-h-full rounded-3xl gap-4">
                     <h3 className="text-xl font-sans font-bold text-rose-800">Mood Log History</h3>
                     <div className="h-full justify-start flex flex-col gap-2">
-                        {affirmations &&
+                        {affirmations ?
                             affirmations.map((moodIdArray, i) => (
                                 <div className="text-xl" key={i}>
                                     {moodIdArray.map((moodId) => findEmojiById(moodId))}
                                 </div>
-                            ))}
+                            ))
+                            :
+                            <div className ="text-xl"> </div>}
                     </div>
                     <button
                         onClick={onClearHistory}
@@ -119,14 +121,14 @@ export default function Selector(props) {
                         Clear Mode Log History
                     </button>
                 </div>
-                <div className="bg-fuchsia-100 p-16 flex flex-col justify-between items-center items-stretch min-h-full rounded-3xl max-w-100">
+                <div className="bg-fuchsia-100 p-16 flex flex-col gap-2 justify-between items-center items-stretch min-h-full rounded-3xl max-w-100">
                     <div className="text-rose-800 text-lg font-semibold">
-                        Your overall mode has beeen: {affirmations && moods && findOverallMood()}
+                        Your overall mode has beeen: {overallMood || "Unknown"}
                     </div>
                     <div>
                         <img
                             className="max-h-120"
-                            src={affirmations && moods ? moodImgMap[findOverallMood()] : neutralImg}
+                            src={moodImgMap[overallMood] || neutralImg}
                             alt=""
                         />
                     </div>
@@ -137,7 +139,7 @@ export default function Selector(props) {
                                 <div className="text-sm mt-2">– {randomQuote.author}</div>
                             </>
                         ) : (
-                            <div>No quote available</div>
+                            <div> </div>
                         )}
                     </div>
                 </div>
